@@ -1,7 +1,6 @@
 # Heyyy , I’m Tanisha 
 ![Banner](https://raw.githubusercontent.com/Tanishadot/your-repo/main/banner.gif)
 
-### 💫 About Me
 I love **building fun, creative projects** while diving deep into **cybersecurity, AI, and web development**.  
 
 - 🌱 Learning: **Ethical Hacking | Ghidra | Deep Learning**  
@@ -10,7 +9,7 @@ I love **building fun, creative projects** while diving deep into **cybersecurit
 
 ---
 
-### 🌈 Fun Skill Bars
+### 🌈Skill Bars
 **Python**: 🟩🟩🟩🟩🟩 85%  
 **JavaScript**: 🟨🟨🟨🟨⬜ 80%  
 **Ethical Hacking**: 🟥🟥🟥⬜⬜ 60%  
