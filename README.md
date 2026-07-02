@@ -10,7 +10,6 @@ Currently focused on production-ready AI systems, multi-agent workflows, and dev
 
 - **ForgeFlow** — Multi-agent production planning platform powered by NVIDIA AgentIQ and NIM.
 - **SkillGraph** — Semantic candidate evaluation using knowledge graphs and LLMs.
-- **LeetCode Sync** *(WIP)* — Automatically sync accepted LeetCode solutions to GitHub.
 - Exploring AI systems for healthcare, accessibility, and developer productivity.
 
 ---
