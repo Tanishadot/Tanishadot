@@ -2,9 +2,9 @@ name: Space Shooter
 
 on:
   schedule:
-    # Every day at 03:17 UTC. Off the hour on purpose: GitHub throttles
-    # scheduled jobs hardest at :00.
-    - cron: '17 3 * * *'
+    # Every six hours. Off the hour on purpose: GitHub throttles scheduled
+    # jobs hardest at :00, so they run late or get dropped.
+    - cron: '17 */6 * * *'
   workflow_dispatch:
   push:
     branches:
