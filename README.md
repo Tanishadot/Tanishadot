@@ -4,6 +4,15 @@ Building AI products that combine LLMs, computer vision, and full-stack engineer
 
 Currently focused on production-ready AI systems, multi-agent workflows, and developer tools that solve real-world problems.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)"
+          srcset="https://raw.githubusercontent.com/Tanishadot/Tanishadot/output/space-shooter-dark.svg">
+  <source media="(prefers-color-scheme: light)"
+          srcset="https://raw.githubusercontent.com/Tanishadot/Tanishadot/output/space-shooter-light.svg">
+  <img alt="My contribution graph, shot down one commit at a time"
+       src="https://raw.githubusercontent.com/Tanishadot/Tanishadot/output/space-shooter.svg">
+</picture>
+
 ---
 
 ## Currently Building

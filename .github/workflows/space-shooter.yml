@@ -1,0 +1,51 @@
+name: Space Shooter
+
+on:
+  schedule:
+    # Every day at 03:17 UTC. Off the hour on purpose: GitHub throttles
+    # scheduled jobs hardest at :00.
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+concurrency:
+  group: space-shooter
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate the animation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node src/index.js --user "${{ github.repository_owner }}" --out dist
+
+      - name: Publish to the output branch
+        run: |
+          set -e
+          cp dist/*.svg "$RUNNER_TEMP/"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # The output branch holds nothing but the generated SVGs, rewritten
+          # from scratch each run so its history never grows unbounded.
+          git checkout --orphan output
+          git rm -rf -q . || true
+          cp "$RUNNER_TEMP"/*.svg .
+          git add -f ./*.svg
+          git commit -m "chore: regenerate space shooter [skip ci]"
+          git push -f origin output
