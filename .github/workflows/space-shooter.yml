@@ -2,9 +2,9 @@ name: Space Shooter
 
 on:
   schedule:
-    # Every six hours. Off the hour on purpose: GitHub throttles scheduled
-    # jobs hardest at :00, so they run late or get dropped.
-    - cron: '17 */6 * * *'
+    # Every half hour, offset off :00/:30 on purpose: GitHub throttles
+    # scheduled jobs hardest on the hour, so they run late or get dropped.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -33,7 +33,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node src/index.js --user "${{ github.repository_owner }}" --out dist
 
+      - name: Skip if the graph has not changed
+        id: check
+        run: |
+          set -e
+          # The render is deterministic, so identical contribution data yields
+          # byte-identical SVGs. Only republish when something actually moved.
+          if git fetch --depth=1 origin output 2>/dev/null \
+             && git show origin/output:space-shooter-dark.svg > "$RUNNER_TEMP/prev.svg" 2>/dev/null \
+             && cmp -s "$RUNNER_TEMP/prev.svg" dist/space-shooter-dark.svg; then
+            echo "unchanged, nothing to publish"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish to the output branch
+        if: steps.check.outputs.changed == 'true'
         run: |
           set -e
           cp dist/*.svg "$RUNNER_TEMP/"
